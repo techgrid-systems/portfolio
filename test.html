@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Sandbox | Adam Ayliffe</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0f172a',
+                        cardbg: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-darkbg text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
+
+    <!-- Header Navbar -->
+    <header class="border-b border-slate-800 bg-cardbg/50 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold">
+                    <i class="fa-solid fa-terminal"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm tracking-wide text-slate-200">Adam Ayliffe <span class="text-cyan-400 font-normal">/ Automation Sandbox</span></h1>
+                </div>
+            </div>
+            <div>
+                <a href="https://github.com" target="_blank" class="text-xs px-3 py-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center gap-2">
+                    <i class="fa-brands fa-github text-sm"></i> View Source
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Workspace -->
+    <main class="max-w-7xl mx-auto px-6 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
+        
+        <!-- Left Panel: Scenario Selector & Parameters (Col 5) -->
+        <div class="lg:col-span-5 flex flex-col space-y-6">
+            
+            <!-- Scenario Cards -->
+            <div class="bg-cardbg border border-slate-800 rounded-xl p-5 shadow-xl">
+                <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3"><i class="fa-solid fa-layer-group text-cyan-400 mr-2"></i>Select Automation Workflow</h2>
+                <div class="grid grid-cols-1 gap-2.5">
+                    <button onclick="setScenario('onboarding')" id="btn-onboarding" class="scenario-btn text-left p-3 rounded-lg border border-cyan-500/50 bg-cyan-500/10 transition flex items-center justify-between group">
+                        <div>
+                            <div class="font-semibold text-sm text-cyan-300">Automated User Provisioning</div>
+                            <div class="text-xs text-slate-400">M365 License Sync, Intune Policy & AD Assignment</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-xs text-cyan-400"></i>
+                    </button>
+                    <button onclick="setScenario('backup')" id="btn-backup" class="scenario-btn text-left p-3 rounded-lg border border-slate-800 bg-slate-900/50 hover:bg-slate-800/80 transition flex items-center justify-between group">
+                        <div>
+                            <div class="font-semibold text-sm text-slate-300 group-hover:text-slate-100">Hybrid Backup Verification</div>
+                            <div class="text-xs text-slate-400">Health Check, Storage Quota & Alert Dispatch</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-600 group-hover:text-slate-300"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Parameters Configurator -->
+            <div class="bg-cardbg border border-slate-800 rounded-xl p-5 shadow-xl flex-grow flex flex-col justify-between">
+                <div>
+                    <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4"><i class="fa-solid fa-sliders text-cyan-400 mr-2"></i>Runtime Configuration</h2>
+                    
+                    <div id="params-container" class="space-y-4">
+                        <!-- Dynamically populated parameters -->
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-800">
+                    <button onclick="runAutomation()" id="run-btn" class="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm shadow-lg shadow-cyan-500/20 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i> Execute Workflow
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Panel: Visualizer & Live Terminal Logs (Col 7) -->
+        <div class="lg:col-span-7 flex flex-col space-y-6">
+            
+            <!-- Step-by-Step Visualizer Pipeline -->
+            <div class="bg-cardbg border border-slate-800 rounded-xl p-5 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400"><i class="fa-solid fa-network-wired text-cyan-400 mr-2"></i>Execution Pipeline</h2>
+                    <span id="pipeline-status" class="text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700">Idle</span>
+                </div>
+                
+                <div id="pipeline-steps" class="grid grid-cols-4 gap-2 relative">
+                    <!-- Steps injected via JS -->
+                </div>
+            </div>
+
+            <!-- Live Terminal Output -->
+            <div class="bg-cardbg border border-slate-800 rounded-xl p-5 shadow-xl flex-grow flex flex-col">
+                <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-800">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                        <span class="text-xs text-slate-400 font-mono ml-2">automation-runner@adam-ayliffe:~</span>
+                    </div>
+                    <button onclick="clearTerminal()" class="text-xs text-slate-400 hover:text-slate-200 transition">Clear Output</button>
+                </div>
+                
+                <div id="terminal-output" class="bg-slate-950 font-mono text-xs text-slate-300 p-4 rounded-lg h-64 overflow-y-auto border border-slate-800/80 selection:bg-cyan-500 selection:text-white flex flex-col space-y-1.5">
+                    <div class="text-slate-500">// System ready. Select a workflow configuration and execute.</div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-cardbg/30 text-center py-4 text-xs text-slate-500">
+        adam.ayliffe.co.uk &bull; Built for Interactive Showcase Portfolios
+    </footer>
+
+    <!-- Core App Engine Script -->
+    <script>
+        let currentScenario = 'onboarding';
+        let isRunning = false;
+
+        const scenarios = {
+            onboarding: {
+                name: "Automated User Provisioning",
+                params: [
+                    { id: 'targetUser', label: 'Target User Name', type: 'text', value: 'Alex Morgan' },
+                    { id: 'department', label: 'Department Group', type: 'select', options: ['Engineering', 'Security Operations', 'Infrastructure', 'Executive'], value: 'Engineering' },
+                    { id: 'sku', label: 'License Provisioning', type: 'select', options: ['Microsoft 365 E5', 'Microsoft 365 E3', 'Business Premium'], value: 'Microsoft 365 E5' }
+                ],
+                steps: [
+                    { title: "Payload Parse", desc: "Validating user JSON attributes" },
+                    { title: "Graph API", desc: "Creating Azure AD object identity" },
+                    { title: "Intune Assign", desc: "Pushing baseline security policies" },
+                    { title: "Ticket Logging", desc: "Notifying ITSM webhook channel" }
+                ],
+                logs: (p) => [
+                    `[INFO] Initializing automation engine context for schema v2.4`,
+                    `[INFO] Parsing inbound payload for target user: ${p.targetUser}`,
+                    `[GRAPH API] POST /v1.0/users -> User account created successfully.`,
+                    `[SECURITY] Assigning security group membership: SEC-GRP-${p.department.toUpperCase()}`,
+                    `[INTUNE] Deploying corporate device configuration profile for license tier: ${p.sku}`,
+                    `[WEBHOOK] Dispatched success notification event to team channel.`,
+                    `[SUCCESS] Workflow completed cleanly with exit code 0.`
+                ]
+            },
+            backup: {
+                name: "Hybrid Backup Verification",
+                params: [
+                    { id: 'targetNode', label: 'Storage Repository Node', type: 'text', value: 'BKP-NFS-PRD-01' },
+                    { id: 'retentionDays', label: 'Retention Threshold (Days)', type: 'select', options: ['7', '30', '90', '365'], value: '30' },
+                    { id: 'alertMode', label: 'Notification Channel', type: 'select', options: ['Webhook & Email', 'Teams Channel Only', 'Silent Log Mode'], value: 'Webhook & Email' }
+                ],
+                steps: [
+                    { title: "Node Ping", desc: "Checking storage node availability" },
+                    { title: "Integrity Scan", desc: "Verifying checksums and snapshots" },
+                    { title: "Quota Audit", desc: "Calculating partition storage usage" },
+                    { title: "Report Sync", desc: "Publishing metrics to dashboard" }
+                ],
+                logs: (p) => [
+                    `[INFO] Starting scheduled backup verification routine`,
+                    `[CONNECT] Handshake established with target repository node: ${p.targetNode}`,
+                    `[CHECKSUM] Verifying snapshot chain integrity (Retention policy: ${p.retentionDays} days)`,
+                    `[STORAGE] Partition /mnt/backup utilization is at 64.2% (Healthy)`,
+                    `[DISPATCH] Notification routed via mode: ${p.alertMode}`,
+                    `[SUCCESS] All backup verification routines passed validation tests.`
+                ]
+            }
+        };
+
+        function renderScenario() {
+            const data = scenarios[currentScenario];
+            
+            // Render Parameters
+            const container = document.getElementById('params-container');
+            container.innerHTML = '';
+            data.params.forEach(param => {
+                let inputHtml = '';
+                if (param.type === 'text') {
+                    inputHtml = `<input type="text" id="param-${param.id}" value="${param.value}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 transition">`;
+                } else if (param.type === 'select') {
+                    let optionsHtml = param.options.map(opt => `<option value="${opt}" ${opt === param.value ? 'selected' : ''}>${opt}</option>`).join('');
+                    inputHtml = `<select id="param-${param.id}" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 transition">${optionsHtml}</select>`;
+                }
+                container.innerHTML += `<div><label class="block text-xs font-medium text-slate-300 mb-1.5">${param.label}</label>${inputHtml}</div>`;
+            });
+
+            // Render Pipeline Steps
+            const stepsContainer = document.getElementById('pipeline-steps');
+            stepsContainer.innerHTML = '';
+            data.steps.forEach((step, idx) => {
+                stepsContainer.innerHTML += `
+                    <div id="step-${idx}" class="p-3 rounded-lg border border-slate-800 bg-slate-900/60 flex flex-col justify-between transition">
+                        <div>
+                            <div class="text-[10px] text-slate-500 font-mono mb-1">STEP 0${idx+1}</div>
+                            <div class="font-semibold text-xs text-slate-300">${step.title}</div>
+                        </div>
+                        <div class="text-[10px] text-slate-400 mt-2">${step.desc}</div>
+                    </div>
+                `;
+            });
+        }
+
+        function setScenario(name) {
+            if (isRunning) return;
+            currentScenario = name;
+            
+            document.querySelectorAll('.scenario-btn').forEach(btn => {
+                btn.className = "scenario-btn text-left p-3 rounded-lg border border-slate-800 bg-slate-900/50 hover:bg-slate-800/80 transition flex items-center justify-between group";
+                btn.querySelector('.font-semibold').className = "font-semibold text-sm text-slate-300 group-hover:text-slate-100";
+            });
+            
+            const activeBtn = document.getElementById(`btn-${name}`);
+            activeBtn.className = "scenario-btn text-left p-3 rounded-lg border border-cyan-500/50 bg-cyan-500/10 transition flex items-center justify-between group";
+            activeBtn.querySelector('.font-semibold').className = "font-semibold text-sm text-cyan-300";
+
+            renderScenario();
+            clearTerminal();
+            logMessage(`[SYSTEM] Loaded profile configuration template: ${scenarios[name].name}`);
+        }
+
+        function logMessage(text, type = 'normal') {
+            const terminal = document.getElementById('terminal-output');
+            const colorClass = type === 'success' ? 'text-emerald-400' : type === 'highlight' ? 'text-cyan-400' : 'text-slate-300';
+            terminal.innerHTML += `<div class="${colorClass}">${text}</div>`;
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        function clearTerminal() {
+            document.getElementById('terminal-output').innerHTML = '<div class="text-slate-500">// Terminal session cleared. Ready for next run.</div>';
+        }
+
+        async function runAutomation() {
+            if (isRunning) return;
+            isRunning = true;
+            
+            const runBtn = document.getElementById('run-btn');
+            runBtn.disabled = true;
+            runBtn.className = "w-full py-3 px-4 rounded-lg bg-slate-800 text-slate-500 font-semibold text-sm cursor-not-allowed flex items-center justify-center gap-2";
+            
+            document.getElementById('pipeline-status').innerText = "Running...";
+            document.getElementById('pipeline-status').className = "text-xs px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 animate-pulse";
+
+            clearTerminal();
+            
+            // Gather dynamic parameters from user input elements
+            const data = scenarios[currentScenario];
+            const currentParams = {};
+            data.params.forEach(param => {
+                const el = document.getElementById(`param-${param.id}`);
+                currentParams[param.id] = el ? el.value : param.value;
+            });
+
+            logMessage(`[EXEC] Triggering automation workflow: ${data.name}...`, 'highlight');
+            logMessage(`[CONFIG] Bound parameters: ${JSON.stringify(currentParams)}`);
+
+            const logs = data.logs(currentParams);
+            
+            for (let i = 0; i < data.steps.length; i++) {
+                // Highlight active step
+                const stepEl = document.getElementById(`step-${i}`);
+                stepEl.className = "p-3 rounded-lg border border-cyan-500/60 bg-cyan-500/10 flex flex-col justify-between transition shadow-lg shadow-cyan-500/10";
+                
+                // Print corresponding logs
+                await new Promise(r => setTimeout(r, 600));
+                logMessage(logs[i*2]);
+                if(logs[i*2 + 1]) {
+                    await new Promise(r => setTimeout(r, 400));
+                    logMessage(logs[i*2 + 1]);
+                }
+
+                // Mark step completed
+                stepEl.className = "p-3 rounded-lg border border-emerald-500/40 bg-emerald-500/10 flex flex-col justify-between transition";
+            }
+
+            logMessage(logs[logs.length - 1], 'success');
+            
+            document.getElementById('pipeline-status').innerText = "Completed Successfully";
+            document.getElementById('pipeline-status').className = "text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+
+            runBtn.disabled = false;
+            runBtn.className = "w-full py-3 px-4 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm shadow-lg shadow-cyan-500/20 transition flex items-center justify-center gap-2";
+            isRunning = false;
+        }
+
+        // Initialize default view on load
+        window.onload = () => {
+            renderScenario();
+        };
+    </script>
+</body>
+</html>
