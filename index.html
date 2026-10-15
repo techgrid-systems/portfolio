@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam Ayliffe | Infrastructure & 3rd Line Support Engineer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-glow {
+            background: radial-gradient(circle, rgba(34,197,94,0.15) 0%, rgba(15,23,42,0) 70%);
+        }
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-slate-800/80 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo / Name with Avatar -->
+                <a href="#hero" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 p-0.5 shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform overflow-hidden">
+                        <img src="adam-ayliffe.png" alt="Adam Ayliffe" class="w-full h-full object-cover rounded-[10px]" onerror="this.src='https://placehold.co/100x100/1e293b/22c55e?text=AA'">
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg tracking-tight block text-white group-hover:text-brand-400 transition-colors">Adam Ayliffe</span>
+                        <span class="text-xs text-slate-400 font-medium tracking-wide">Infrastructure Engineer</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-slate-300 hover:text-brand-400 transition-colors">About</a>
+                    <a href="#skills" class="text-slate-300 hover:text-brand-400 transition-colors">Skills</a>
+                    <a href="#experience" class="text-slate-300 hover:text-brand-400 transition-colors">Experience</a>
+                    <a href="#projects" class="text-slate-300 hover:text-brand-400 transition-colors">Projects</a>
+                    <a href="#education" class="text-slate-300 hover:text-brand-400 transition-colors">Education & Certs</a>
+                    <a href="#contact" class="text-slate-300 hover:text-brand-400 transition-colors">Contact</a>
+                </nav>
+
+                <!-- CTA Button & Mobile Menu Toggle -->
+                <div class="flex items-center space-x-4">
+                    <a href="mailto:adam.ayliffe2018@gmail.com" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-slate-950 bg-brand-500 hover:bg-brand-400 shadow-lg shadow-brand-500/20 transition-all transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> Get in Touch
+                    </a>
+                    <button id="mobile-menu-button" aria-label="Toggle Navigation Menu" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-900 border border-slate-800">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-6 py-6 space-y-4 shadow-2xl transition-all">
+            <a href="#about" class="mobile-link block text-base font-medium text-slate-300 hover:text-brand-400">About</a>
+            <a href="#skills" class="mobile-link block text-base font-medium text-slate-300 hover:text-brand-400">Skills</a>
+            <a href="#experience" class="mobile-link block text-base font-medium text-slate-300 hover:text-brand-400">Experience</a>
+            <a href="#projects" class="mobile-link block text-base font-medium text-slate-300 hover:text-brand-400">Projects</a>
+            <a href="#education" class="mobile-link block text-base font-medium text-slate-300 hover:text-brand-400">Education & Certs</a>
+            <a href="#contact" class="mobile-link block text-base font-medium text-slate-300 hover:text-brand-400">Contact</a>
+            <div class="pt-4 border-t border-slate-800 flex flex-col space-y-3">
+                <a href="mailto:adam.ayliffe2018@gmail.com" class="flex items-center justify-center px-4 py-3 rounded-xl text-sm font-semibold text-slate-950 bg-brand-500 hover:bg-brand-400">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Get in Touch
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-20 px-4 overflow-hidden">
+        <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-5xl mx-auto text-center relative z-10" data-aos="fade-up" data-aos-duration="1000">
+            
+            <!-- Hero Profile Picture -->
+            <div class="mb-8 flex justify-center">
+                <div class="relative group">
+                    <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-500 to-emerald-400 rounded-full blur opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                    <div class="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full p-1 bg-slate-900 border-2 border-brand-500/50 shadow-2xl overflow-hidden mx-auto">
+                        <img src="adam-ayliffe.png" alt="Adam Ayliffe" class="w-full h-full object-cover rounded-full transform group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/300x300/1e293b/22c55e?text=Adam'">
+                    </div>
+                </div>
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                Architecting Robust <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-emerald-400 to-teal-300">Cloud & IT Infrastructure</span>
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 mb-10 leading-relaxed">
+                Results-driven Infrastructure & 3rd Line Support Engineer with 7+ years of expertise delivering enterprise network security, cloud migrations, and high-performance automated solutions.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#experience" class="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-slate-950 bg-brand-500 hover:bg-brand-400 shadow-xl shadow-brand-500/25 transition-all transform hover:-translate-y-1 text-center">
+                    Explore Experience <i class="fa-solid fa-arrow-down ml-2"></i>
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 transition-all text-center">
+                    Contact Me
+                </a>
+            </div>
+
+            <!-- Quick Info Badges -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
+                <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+                    <div class="text-brand-400 text-xl font-bold mb-1">7+ Years</div>
+                    <div class="text-slate-400 text-xs font-medium">Technical Experience</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+                    <div class="text-brand-400 text-xl font-bold mb-1">Fortinet & M365</div>
+                    <div class="text-slate-400 text-xs font-medium">Core Specialization</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+                    <div class="text-brand-400 text-xl font-bold mb-1">Power Automate</div>
+                    <div class="text-slate-400 text-xs font-medium">Workflow Architecture</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+                    <div class="text-brand-400 text-xl font-bold mb-1">London, UK</div>
+                    <div class="text-slate-400 text-xs font-medium">Based & Ready</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-slate-900/40 border-t border-slate-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5" data-aos="fade-right">
+                    <div class="relative">
+                        <div class="absolute -inset-2 bg-gradient-to-r from-brand-500 to-teal-400 rounded-3xl blur-xl opacity-20"></div>
+                        <div class="relative rounded-2xl bg-slate-900 border border-slate-800 p-8 shadow-2xl">
+                            <div class="w-16 h-16 rounded-2xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-2xl font-bold mb-6">
+                                <i class="fa-solid fa-server"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Professional Profile</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                                Results-driven Infrastructure and 3rd Line Support Engineer with over 7 years of progressive experience delivering high-level technical support, infrastructure deployment, and project delivery across on-premises, hybrid, and cloud environments.
+                            </p>
+                            <div class="space-y-3 text-sm text-slate-300">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa-solid fa-check text-brand-400"></i>
+                                    <span>Expert in Firewall & Network Security</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa-solid fa-check text-brand-400"></i>
+                                    <span>Advanced M365 & SharePoint Migrations</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa-solid fa-check text-brand-400"></i>
+                                    <span>Workflow Automation & Webhooks</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-7" data-aos="fade-left">
+                    <div class="inline-block px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-4 tracking-wider uppercase">
+                        About Adam Ayliffe
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-6">
+                        Solving Complex Technical Challenges with Precision & Reliability
+                    </h2>
+                    <p class="text-slate-300 text-base leading-relaxed mb-6">
+                        Throughout my career, I have proven my expertise in network security, server administration, firewall configuration, and complex tenant migrations. Adept at mentoring junior engineers, streamlining service desk operations, and building automated JSON/webhook integrations that accelerate IT efficiency.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                            <div class="text-white font-semibold text-sm mb-1 flex items-center">
+                                <i class="fa-solid fa-shield-halved text-brand-400 mr-2"></i> Network Security
+                            </div>
+                            <p class="text-xs text-slate-400">FortiGate, WatchGuard, VLAN segmentation, and secure VPN architectures.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+                            <div class="text-white font-semibold text-sm mb-1 flex items-center">
+                                <i class="fa-solid fa-cloud text-brand-400 mr-2"></i> Cloud Platforms
+                            </div>
+                            <p class="text-xs text-slate-400">Nutanix VM administration, Azure AD, Hybrid Exchange, and M365.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Competencies / Skills Section -->
+    <section id="skills" class="py-24 bg-slate-950 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <div class="inline-block px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-4 tracking-wider uppercase">
+                    Technical Expertise
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">Core Competencies</h2>
+                <p class="text-slate-400 text-base">A comprehensive breakdown of platforms, tools, and protocols I work with daily.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skill Category 1 -->
+                <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/50 transition-all shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl font-bold mb-5">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Networking & Security</h3>
+                    <p class="text-slate-400 text-xs mb-4">Enterprise firewalls, VLAN architecture, and network monitoring.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">FortiGate</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">WatchGuard</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">DrayTek</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Unifi USG</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">VLANs / VPNs</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Cisco AnyConnect</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">PRTG / SolarWinds</span>
+                    </div>
+                </div>
+
+                <!-- Skill Category 2 -->
+                <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/50 transition-all shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl font-bold mb-5">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Server & Cloud Platforms</h3>
+                    <p class="text-slate-400 text-xs mb-4">Virtualization, Active Directory, and Microsoft 365 administration.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Nutanix VMs</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Windows Server</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">AD / DNS / DHCP</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Group Policy</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Azure AD</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">SharePoint Online</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Hybrid Exchange</span>
+                    </div>
+                </div>
+
+                <!-- Skill Category 3 -->
+                <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/50 transition-all shadow-xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl font-bold mb-5">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Data Protection & Backup</h3>
+                    <p class="text-slate-400 text-xs mb-4">Disaster recovery planning, backup monitoring, and redundancy.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">HYCU</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Redstore</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Datto</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Veeam</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Disaster Recovery</span>
+                    </div>
+                </div>
+
+                <!-- Skill Category 4 -->
+                <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/50 transition-all shadow-xl" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl font-bold mb-5">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Tools & Ticketing Systems</h3>
+                    <p class="text-slate-400 text-xs mb-4">Enterprise service desk management and remote administration.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Autotask</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">ServiceNow</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Sentinel</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Avaya / Zoom / Teams</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">VMware</span>
+                    </div>
+                </div>
+
+                <!-- Skill Category 5 -->
+                <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/50 transition-all shadow-xl" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl font-bold mb-5">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Coding & Automation</h3>
+                    <p class="text-slate-400 text-xs mb-4">Workflow automation, JSON parsing, webhooks, and web scripting.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Power Automate</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">JSON Parsing</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">HTTP Webhooks</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">HTML5 / CSS</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">PHP / MySQL</span>
+                    </div>
+                </div>
+
+                <!-- Skill Category 6 -->
+                <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-brand-500/50 transition-all shadow-xl" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl font-bold mb-5">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Project Delivery</h3>
+                    <p class="text-slate-400 text-xs mb-4">End-to-end technical project execution and data centre ops.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Firewall Migrations</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Server Upgrades</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">SharePoint Migrations</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-medium">Data Centre Operations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience Section -->
+    <section id="experience" class="py-24 bg-slate-900/40 border-t border-slate-900">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <div class="inline-block px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-4 tracking-wider uppercase">
+                    Career Journey
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">Professional Experience</h2>
+                <p class="text-slate-400 text-base">Over 7 years of progressive engineering experience across top cloud and IT service providers.</p>
+            </div>
+
+            <div class="relative border-l border-slate-800 ml-4 sm:ml-8 space-y-12">
+                
+                <!-- Job 1 -->
+                <div class="relative pl-8 sm:pl-12" data-aos="fade-up">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-brand-500 border-4 border-slate-950 flex items-center justify-center text-slate-950 font-bold text-xs shadow-lg shadow-brand-500/40">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div class="p-6 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Infrastructure Engineer</h3>
+                                <div class="text-brand-400 font-medium text-sm">Skye Cloud</div>
+                            </div>
+                            <span class="inline-block px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold w-fit">
+                                May 2024 – Present
+                            </span>
+                        </div>
+                        <ul class="space-y-2 text-slate-300 text-sm mb-6 list-disc list-inside">
+                            <li>Manage and configure FortiGate firewalls and Unifi controllers to enhance client network security and performance.</li>
+                            <li>Deliver SharePoint migration projects from legacy environments to Microsoft 365.</li>
+                            <li>Administer Nutanix platform for virtual machine builds and deployments.</li>
+                            <li>Conduct data centre visits for hardware installations, network troubleshooting, and infrastructure upgrades.</li>
+                            <li>Provide 3rd line escalation support for complex issues, mentoring 1st line engineers.</li>
+                            <li>Monitor systems via PRTG and manage backups using HYCU and Redstore solutions.</li>
+                        </ul>
+                        <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80">
+                            <div class="text-xs font-bold text-brand-400 uppercase tracking-wider mb-2">Power Automate & Infrastructure Automation</div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Develop and implement HTTP requests to Autotask to streamline service desk operations. Configure JSON files to accurately parse raw data for automated ticket generation. Design and deploy HTTP webhooks to integrate with 3rd party platforms (Cloud Radial) to gather data for building and automating new starter accounts within customer Microsoft 365 environments.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="relative pl-8 sm:pl-12" data-aos="fade-up">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-slate-800 border-4 border-slate-950 flex items-center justify-center text-slate-300 font-bold text-xs">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div class="p-6 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">2nd / 3rd Line Engineer</h3>
+                                <div class="text-brand-400 font-medium text-sm">Cloudscape IT</div>
+                            </div>
+                            <span class="inline-block px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold w-fit">
+                                Feb 2023 – May 2024
+                            </span>
+                        </div>
+                        <ul class="space-y-2 text-slate-300 text-sm list-disc list-inside">
+                            <li>Configured firewalls, switches, and Unifi Cloud networks for SME and enterprise clients.</li>
+                            <li>Managed Active Directory environments, implementing group policies and access controls.</li>
+                            <li>Delivered project-based deployments including network expansions and cloud migrations.</li>
+                            <li>Performed on-site customer visits for infrastructure upgrades and troubleshooting.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="relative pl-8 sm:pl-12" data-aos="fade-up">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-slate-800 border-4 border-slate-950 flex items-center justify-center text-slate-300 font-bold text-xs">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div class="p-6 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">2nd Line Engineer</h3>
+                                <div class="text-brand-400 font-medium text-sm">Speedster IT</div>
+                            </div>
+                            <span class="inline-block px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold w-fit">
+                                June 2022 – February 2023
+                            </span>
+                        </div>
+                        <ul class="space-y-2 text-slate-300 text-sm list-disc list-inside">
+                            <li>Deployed and managed WatchGuard, Unifi USG, and DrayTek firewalls with VLAN segmentation.</li>
+                            <li>Oversaw print management solutions using AD security groups and group policies.</li>
+                            <li>Executed network deployment projects including cabling, switch installations, and site audits.</li>
+                            <li>Supported Office 365, Active Directory, DHCP, and Group Policy environments.</li>
+                            <li>Managed ticketing (Autotask) and remote support (Datto) for 100+ client environments.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 4 -->
+                <div class="relative pl-8 sm:pl-12" data-aos="fade-up">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-slate-800 border-4 border-slate-950 flex items-center justify-center text-slate-300 font-bold text-xs">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div class="p-6 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">1st Line Engineer</h3>
+                                <div class="text-brand-400 font-medium text-sm">Speedster IT</div>
+                            </div>
+                            <span class="inline-block px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold w-fit">
+                                July 2021 – June 2022
+                            </span>
+                        </div>
+                        <ul class="space-y-2 text-slate-300 text-sm list-disc list-inside">
+                            <li>Microsoft 365: Managed licensing, account creation, shared mailboxes, and SharePoint security groups.</li>
+                            <li>Active Directory: Handled password resets and new account creations.</li>
+                            <li>DHCP: Reserved IPs and bound them with MAC addresses.</li>
+                            <li>CCTV: Configured Unifi and 3rd party CCTV equipment.</li>
+                            <li>PRTG: Monitored customer network nodes and installed customer internet lines.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 5 -->
+                <div class="relative pl-8 sm:pl-12" data-aos="fade-up">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-slate-800 border-4 border-slate-950 flex items-center justify-center text-slate-300 font-bold text-xs">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div class="p-6 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">IT Support Analyst</h3>
+                                <div class="text-brand-400 font-medium text-sm">Leathams Ltd</div>
+                            </div>
+                            <span class="inline-block px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold w-fit">
+                                Apr 2021 – Jul 2021
+                            </span>
+                        </div>
+                        <ul class="space-y-2 text-slate-300 text-sm list-disc list-inside">
+                            <li>Administered Active Directory accounts and Microsoft 365 licenses.</li>
+                            <li>Supported Hybrid Exchange configuration and troubleshooting.</li>
+                            <li>Managed ERP access for Great Plains database users.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 6 -->
+                <div class="relative pl-8 sm:pl-12" data-aos="fade-up">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-slate-800 border-4 border-slate-950 flex items-center justify-center text-slate-300 font-bold text-xs">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div class="p-6 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Desktop Analyst</h3>
+                                <div class="text-brand-400 font-medium text-sm">MHRA (IDE Group)</div>
+                            </div>
+                            <span class="inline-block px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold w-fit">
+                                Jan 2020 – Mar 2021
+                            </span>
+                        </div>
+                        <ul class="space-y-2 text-slate-300 text-sm list-disc list-inside">
+                            <li>Supported 1,500+ users with O365, VPN, RSA tokens, VDI, and Cisco AnyConnect.</li>
+                            <li>Led a project to reassign RSA tokens for 100+ staff prior to expiry.</li>
+                            <li>Provided 2nd line escalation and remote troubleshooting for nationwide users.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 7 -->
+                <div class="relative pl-8 sm:pl-12" data-aos="fade-up">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-slate-800 border-4 border-slate-950 flex items-center justify-center text-slate-300 font-bold text-xs">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div class="p-6 sm:p-8 rounded-2xl bg-slate-900/60 border border-slate-800 shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Service Desk Analyst</h3>
+                                <div class="text-brand-400 font-medium text-sm">IDE Group</div>
+                            </div>
+                            <span class="inline-block px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold w-fit">
+                                Feb 2019 – Jan 2020
+                            </span>
+                        </div>
+                        <ul class="space-y-2 text-slate-300 text-sm list-disc list-inside">
+                            <li>Supported Nuffield Health sites with high-priority network outage resolution.</li>
+                            <li>Troubleshot Windows 10, O365, VoIP, VMware, and networking issues.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Delivery Section -->
+    <section id="projects" class="py-24 bg-slate-950 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <div class="inline-block px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-4 tracking-wider uppercase">
+                    Key Achievements
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">Project Delivery & Initiatives</h2>
+                <p class="text-slate-400 text-base">Key technical projects and automated workflows architected throughout my career.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-500/50 transition-all shadow-xl flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl font-bold mb-6">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Automation & Workflow Projects</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Architected and deployed end-to-end automated workflows using Power Automate to reduce manual entry for new starter onboarding and IT ticket processing.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">Power Automate</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">JSON Webhooks</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">Autotask Integration</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-500/50 transition-all shadow-xl flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl font-bold mb-6">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Cloud & Infrastructure</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Executed complex Swing Migrations for Microsoft Entra Connect (Azure AD Sync) and configured redundant enterprise network architectures featuring high-availability firewall clusters.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">Azure AD Sync</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">FortiGate HA</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">Nutanix VM</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-500/50 transition-all shadow-xl flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl font-bold mb-6">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Deployment & Upgrades</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Successfully led network deployments, firewall migrations, server upgrades, and large-scale SharePoint migrations from legacy file shares to secure cloud repositories.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">SharePoint Online</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">Switch Deployments</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">Site Audits</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-500/50 transition-all shadow-xl flex flex-col justify-between" data-aos="fade-up" data-aos-delay="400">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl font-bold mb-6">
+                            <i class="fa-solid fa-shield-cat"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Lifecycle Management</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Performed comprehensive hardware lifecycle audits across diverse networking environments, ensuring security compliance and infrastructure performance.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">Hardware Audits</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">HYCU / Redstore</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">Security Compliance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications Section -->
+    <section id="education" class="py-24 bg-slate-900/40 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <div class="inline-block px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-4 tracking-wider uppercase">
+                    Credentials & Learning
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">Education & Certifications</h2>
+                <p class="text-slate-400 text-base">Professional certifications and academic qualifications underpinning my technical expertise.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Certifications Column -->
+                <div data-aos="fade-right">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                        <i class="fa-solid fa-award text-brand-400 mr-3"></i> Certifications & Awards
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 font-bold shrink-0 mt-0.5">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Microsoft Power Automate – Advanced</h4>
+                                <p class="text-xs text-brand-400 font-medium mb-1">Certified 2025</p>
+                                <p class="text-xs text-slate-400">Advanced workflow architecture, API integrations, and webhook automation.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 font-bold shrink-0 mt-0.5">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Certified Engineer Load Balancer</h4>
+                                <p class="text-xs text-brand-400 font-medium mb-1">Certified 2025</p>
+                                <p class="text-xs text-slate-400">High-availability traffic management and load balancing configurations.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 font-bold shrink-0 mt-0.5">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Fortinet Fundamentals / Fortinet Associate</h4>
+                                <p class="text-xs text-brand-400 font-medium mb-1">Certified 2024</p>
+                                <p class="text-xs text-slate-400">Enterprise firewall deployment, security policies, and secure tunnel management.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold shrink-0 mt-0.5">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Jack Petchey Award</h4>
+                                <p class="text-xs text-amber-400 font-medium mb-1">Recognition for Outstanding Contribution (2016)</p>
+                                <p class="text-xs text-slate-400">Awarded for leadership, community contribution, and dedication.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Education Column -->
+                <div data-aos="fade-left">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                        <i class="fa-solid fa-graduation-cap text-brand-400 mr-3"></i> Academic Qualifications
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 font-bold shrink-0 mt-0.5">
+                                <i class="fa-solid fa-book"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Level 4 University Qualification</h4>
+                                <p class="text-xs text-brand-400 font-medium mb-1">Newham College, East Ham (Sep 2018 – Dec 2018)</p>
+                                <p class="text-xs text-slate-400">Advanced higher education studies in technical computing and systems.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 font-bold shrink-0 mt-0.5">
+                                <i class="fa-solid fa-book"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Level 1 Diploma for IT Users & Functional Skills</h4>
+                                <p class="text-xs text-brand-400 font-medium mb-1">Newham College, Stratford (Aug 2016 – Jul 2017)</p>
+                                <p class="text-xs text-slate-400">Core IT competency certification alongside Maths and English Functional Skills.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 font-bold shrink-0 mt-0.5">
+                                <i class="fa-solid fa-book"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Secondary Education & Vocational Foundation</h4>
+                                <p class="text-xs text-brand-400 font-medium mb-1">The Business Academy Bexley & Greenwich Community College</p>
+                                <p class="text-xs text-slate-400">NCFE Awards, Applied Science BTEC, and Business Level 1 & 2 qualifications.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-slate-950 border-t border-slate-900 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+            <div class="inline-block px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-4 tracking-wider uppercase">
+                Get In Touch
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-6">Let's Discuss Your Next Project</h2>
+            <p class="text-slate-300 text-base sm:text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+                Whether you're looking for an experienced Infrastructure Engineer for cloud migrations, firewall deployment, or automation architecture, my inbox is always open.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+                <a href="mailto:adam.ayliffe2018@gmail.com" class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-500/50 transition-all group flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="text-white font-semibold text-sm mb-1">Email Me</div>
+                    <div class="text-slate-400 text-xs break-all">adam.ayliffe2018@gmail.com</div>
+                </a>
+
+                <a href="tel:07487613849" class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-500/50 transition-all group flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="text-white font-semibold text-sm mb-1">Call Me</div>
+                    <div class="text-slate-400 text-xs">07487 613 849</div>
+                </a>
+
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl mb-4">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div class="text-white font-semibold text-sm mb-1">Location</div>
+                    <div class="text-slate-400 text-xs">London, UK</div>
+                </div>
+            </div>
+
+            <a href="mailto:adam.ayliffe2018@gmail.com" class="inline-flex items-center justify-center px-8 py-4 rounded-xl font-bold text-slate-950 bg-brand-500 hover:bg-brand-400 shadow-xl shadow-brand-500/25 transition-all transform hover:-translate-y-1 text-base">
+                <i class="fa-solid fa-paper-plane mr-2"></i> Send Message to Adam
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <span class="text-slate-400 text-sm">© 2026 Adam Ayliffe. All rights reserved.</span>
+            </div>
+            <div class="flex items-center space-x-6 text-slate-400 text-sm">
+                <a href="#about" class="hover:text-brand-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-brand-400 transition-colors">Skills</a>
+                <a href="#experience" class="hover:text-brand-400 transition-colors">Experience</a>
+                <a href="#projects" class="hover:text-brand-400 transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-brand-400 transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Animation & UI Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Mobile Menu Toggle logic
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Close mobile menu on clicking any navigation link
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Navbar shadow and background blur effect on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-2xl', 'bg-slate-950/90');
+            } else {
+                navbar.classList.remove('shadow-2xl', 'bg-slate-950/90');
+            }
+        });
+    </script>
+</body>
+</html>
