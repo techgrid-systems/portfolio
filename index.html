@@ -76,9 +76,9 @@
 
                 <!-- CTA Button & Mobile Menu Toggle -->
                 <div class="flex items-center space-x-4">
-                    <a href="mailto:adam.ayliffe2018@gmail.com" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-slate-950 bg-brand-500 hover:bg-brand-400 shadow-lg shadow-brand-500/20 transition-all transform hover:-translate-y-0.5">
-                        <i class="fa-solid fa-paper-plane mr-2"></i> Get in Touch
-                    </a>
+                    <button onclick="toggleHiddenPage()" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-slate-950 bg-brand-500 hover:bg-brand-400 shadow-lg shadow-brand-500/20 transition-all transform hover:-translate-y-0.5 cursor-pointer">
+                        <i class="fa-solid fa-link mr-2"></i> Quick Links
+                    </button>
                     <button id="mobile-menu-button" aria-label="Toggle Navigation Menu" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-900 border border-slate-800">
                         <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
                     </button>
@@ -95,9 +95,9 @@
             <a href="#education" class="mobile-link block text-base font-medium text-slate-300 hover:text-brand-400">Education & Certs</a>
             <a href="#contact" class="mobile-link block text-base font-medium text-slate-300 hover:text-brand-400">Contact</a>
             <div class="pt-4 border-t border-slate-800 flex flex-col space-y-3">
-                <a href="mailto:adam.ayliffe2018@gmail.com" class="flex items-center justify-center px-4 py-3 rounded-xl text-sm font-semibold text-slate-950 bg-brand-500 hover:bg-brand-400">
-                    <i class="fa-solid fa-paper-plane mr-2"></i> Get in Touch
-                </a>
+                <button onclick="toggleHiddenPage(); mobileMenu.classList.add('hidden'); menuIcon.classList.remove('fa-xmark'); menuIcon.classList.add('fa-bars');" class="flex items-center justify-center px-4 py-3 rounded-xl text-sm font-semibold text-slate-950 bg-brand-500 hover:bg-brand-400 w-full cursor-pointer">
+                    <i class="fa-solid fa-link mr-2"></i> Quick Links
+                </button>
             </div>
         </div>
     </header>
@@ -740,11 +740,11 @@
                     <div class="text-slate-400 text-xs break-all">adam.ayliffe2018@gmail.com</div>
                 </a>
 
-                <a href="tel:07487613849" class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-500/50 transition-all group flex flex-col items-center">
+                <a href="https://wa.me/447487613849" target="_blank" rel="noopener noreferrer" class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-500/50 transition-all group flex flex-col items-center">
                     <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-phone"></i>
+                        <i class="fa-brands fa-whatsapp"></i>
                     </div>
-                    <div class="text-white font-semibold text-sm mb-1">Call Me</div>
+                    <div class="text-white font-semibold text-sm mb-1">WhatsApp Me</div>
                     <div class="text-slate-400 text-xs">07487 613 849</div>
                 </a>
 
@@ -757,11 +757,56 @@
                 </div>
             </div>
 
-            <a href="mailto:adam.ayliffe2018@gmail.com" class="inline-flex items-center justify-center px-8 py-4 rounded-xl font-bold text-slate-950 bg-brand-500 hover:bg-brand-400 shadow-xl shadow-brand-500/25 transition-all transform hover:-translate-y-1 text-base">
-                <i class="fa-solid fa-paper-plane mr-2"></i> Send Message to Adam
-            </a>
+            <button onclick="toggleHiddenPage()" class="inline-flex items-center justify-center px-8 py-4 rounded-xl font-bold text-slate-950 bg-brand-500 hover:bg-brand-400 shadow-xl shadow-brand-500/25 transition-all transform hover:-translate-y-1 text-base cursor-pointer">
+                <i class="fa-solid fa-link mr-2"></i> Quick Links
+            </button>
         </div>
     </section>
+
+    <!-- Hidden Page Overlay / Modal Section -->
+    <div id="hidden-page" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-md hidden transition-opacity duration-300 px-4">
+        <div class="relative w-full max-w-lg p-8 rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl text-center" data-aos="zoom-in" data-aos-duration="300">
+            <!-- Close Button -->
+            <button onclick="toggleHiddenPage()" aria-label="Close Quick Links" class="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-xl bg-slate-800/60 border border-slate-700 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="w-16 h-16 rounded-2xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-2xl font-bold mx-auto mb-6">
+                <i class="fa-solid fa-link"></i>
+            </div>
+            
+            <h3 class="text-2xl font-extrabold text-white tracking-tight mb-2">Quick Links</h3>
+            <p class="text-slate-400 text-sm mb-8">Connect with me on professional networks and view my verified credentials.</p>
+
+            <div class="space-y-4">
+                <a href="https://www.linkedin.com/in/adamrayliffe" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-slate-800/60 border border-slate-700 hover:border-brand-500 text-slate-200 hover:text-brand-400 transition-all group">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-lg bg-brand-500/10 flex items-center justify-center text-brand-400 group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-linkedin-in text-lg"></i>
+                        </div>
+                        <span class="font-semibold text-sm">LinkedIn Profile</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-brand-400"></i>
+                </a>
+
+                <a href="https://www.credly.com/users/adamrayliffe" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-slate-800/60 border border-slate-700 hover:border-brand-500 text-slate-200 hover:text-brand-400 transition-all group">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-lg bg-brand-500/10 flex items-center justify-center text-brand-400 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-award text-lg"></i>
+                        </div>
+                        <span class="font-semibold text-sm">Credly Badges</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-brand-400"></i>
+                </a>
+            </div>
+
+            <div class="mt-8">
+                <button onclick="toggleHiddenPage()" class="w-full py-3 rounded-xl font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-all text-sm">
+                    Back to Portfolio
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-slate-950 border-t border-slate-900 py-12">
@@ -787,6 +832,12 @@
             once: true,
             offset: 100
         });
+
+        // Toggle Hidden Page / Modal View
+        function toggleHiddenPage() {
+            const hiddenPage = document.getElementById('hidden-page');
+            hiddenPage.classList.toggle('hidden');
+        }
 
         // Mobile Menu Toggle logic
         const mobileMenuButton = document.getElementById('mobile-menu-button');
