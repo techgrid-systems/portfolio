@@ -35,9 +35,10 @@
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        body {
+        html, body {
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            width: 100%;
         }
         .hero-glow {
             background: radial-gradient(circle, rgba(34,197,94,0.15) 0%, rgba(15,23,42,0) 70%);
@@ -56,26 +57,26 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo / Avatar -->
-                <a href="#hero" class="flex items-center space-x-3 group">
+                <a href="#hero" class="flex items-center space-x-3 group shrink-0">
                     <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 p-0.5 shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform overflow-hidden shrink-0">
                         <img src="adam-ayliffe.png" alt="Adam Ayliffe" class="w-full h-full object-cover rounded-[10px]" onerror="this.src='https://placehold.co/100x100/1e293b/22c55e?text=AA'">
                     </div>
                 </a>
 
                 <!-- Desktop Menu -->
-                <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm font-medium">
-                    <a href="#about" class="text-slate-300 hover:text-brand-400 transition-colors">About</a>
-                    <a href="#skills" class="text-slate-300 hover:text-brand-400 transition-colors">Skills</a>
-                    <a href="#experience" class="text-slate-300 hover:text-brand-400 transition-colors">Experience</a>
-                    <a href="#projects" class="text-slate-300 hover:text-brand-400 transition-colors">Projects</a>
-                    <a href="#education" class="text-slate-300 hover:text-brand-400 transition-colors">Education & Certs</a>
-                    <a href="#contact" class="text-slate-300 hover:text-brand-400 transition-colors">Contact</a>
+                <nav class="hidden md:flex items-center space-x-4 lg:space-x-8 text-xs lg:text-sm font-medium">
+                    <a href="#about" class="text-slate-300 hover:text-brand-400 transition-colors whitespace-nowrap">About</a>
+                    <a href="#skills" class="text-slate-300 hover:text-brand-400 transition-colors whitespace-nowrap">Skills</a>
+                    <a href="#experience" class="text-slate-300 hover:text-brand-400 transition-colors whitespace-nowrap">Experience</a>
+                    <a href="#projects" class="text-slate-300 hover:text-brand-400 transition-colors whitespace-nowrap">Projects</a>
+                    <a href="#education" class="text-slate-300 hover:text-brand-400 transition-colors whitespace-nowrap">Education & Certs</a>
+                    <a href="#contact" class="text-slate-300 hover:text-brand-400 transition-colors whitespace-nowrap">Contact</a>
                 </nav>
 
                 <!-- CTA Button & Mobile Menu Toggle -->
-                <div class="flex items-center space-x-3 sm:space-x-4">
-                    <button onclick="toggleHiddenPage()" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-slate-950 bg-brand-500 hover:bg-brand-400 shadow-lg shadow-brand-500/20 transition-all transform hover:-translate-y-0.5 cursor-pointer">
-                        <i class="fa-solid fa-link mr-2"></i> Quick Links
+                <div class="flex items-center space-x-3 sm:space-x-4 shrink-0">
+                    <button onclick="toggleHiddenPage()" class="hidden sm:inline-flex items-center justify-center px-3.5 py-2 lg:px-4 rounded-xl text-xs lg:text-sm font-semibold text-slate-950 bg-brand-500 hover:bg-brand-400 shadow-lg shadow-brand-500/20 transition-all transform hover:-translate-y-0.5 cursor-pointer whitespace-nowrap">
+                        <i class="fa-solid fa-link mr-1.5 lg:mr-2"></i> Quick Links
                     </button>
                     <button id="mobile-menu-button" aria-label="Toggle Navigation Menu" class="md:hidden text-slate-300 hover:text-white p-2.5 rounded-lg bg-slate-900 border border-slate-800 transition-colors">
                         <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
